@@ -73,6 +73,11 @@ class Post
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
+    private $online;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -146,6 +151,18 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getOnline(): ?bool
+    {
+        return $this->online;
+    }
+
+    public function setOnline(bool $online): self
+    {
+        $this->online = $online;
 
         return $this;
     }
