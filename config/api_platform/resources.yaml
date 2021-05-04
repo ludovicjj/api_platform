@@ -33,11 +33,28 @@ resources:
                 method: 'GET'
                 path: '/posts/count'
                 controller: App\Controller\PostCountController
+                read: false
                 pagination_enabled: false
                 openapi_context:
-                    summary: Calcul le nombre d'article
-                    description: Calcul le nombre d'article
-
+                    summary: Calcule le nombre d'article online/offline
+                    description: Calcule le nombre d'article online/offline
+                    parameters:
+                        - name: online
+                          description: filtre les articles en ligne
+                          in: query
+                          required: false
+                          allowEmptyValue: true
+                          schema:
+                              type: integer
+                              enum: [0, 1]
+                    responses:
+                        200:
+                            description: Nombre de résultats
+                            content:
+                                application/json:
+                                    schema:
+                                        type: integer
+                                        example: 3
         itemOperations:
             put:
                 method: PUT
