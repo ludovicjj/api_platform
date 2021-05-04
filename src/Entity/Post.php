@@ -75,6 +75,7 @@ class Post
 
     /**
      * @ORM\Column(type="boolean", options={"default":"0"})
+     * @Groups({"read:posts"})
      */
     private $online;
 
