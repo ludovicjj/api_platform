@@ -3,10 +3,20 @@ resources:
         collectionOperations:
             get:
                 method: GET
+            post:
+                method: POST
         itemOperations:
+            put:
+                method: PUT
+            delete:
+                method: DELETE
+            patch:
+                method: PATCH
             get:
                 method: GET
-
+                controller: ApiPlatform\Core\Action\NotFoundAction
+                read: false
+                output: false
 
     App\Entity\Post:
         attributes:
