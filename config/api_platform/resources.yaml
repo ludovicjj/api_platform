@@ -11,7 +11,8 @@ resources:
     App\Entity\Post:
         attributes:
             normalization_context:
-                groups: ['read:posts', 'read:post']
+                groups: ['read:posts']
+                openapi_definition_name: 'Collection'
             denormalization_context:
                 groups: ['write:post']
             pagination_items_per_page: 2
@@ -23,7 +24,8 @@ resources:
                 method: GET
                 filters: ['post.order_filter']
                 normalization_context:
-                    groups: ['read:posts']
+                    groups: ['read:posts', 'read:post']
+                    openapi_definition_name: 'Detail'
             post:
                 method: POST
                 validation_groups: [App\Entity\Post, 'validationGroups']
@@ -35,3 +37,14 @@ resources:
                 method: DELETE
             get:
                 method: GET
+            publish:
+                method: 'POST'
+                path: '/posts/{id}/publish'
+                controller: App\Controller\PostPublishController
+                openapi_context:
+                    summary: Permet de mettre en ligne un article
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
