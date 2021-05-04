@@ -3,15 +3,26 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\PostRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class PostCountController
 {
-    public function __invoke($data)
-    {
-        $nbPost = count($data);
-        $data = ['nbPosts' => $nbPost];
+    private $postRepository;
 
-        return new JsonResponse($data);
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
+    public function __invoke(Request $request): int
+    {
+        $online = $request->get('online');
+        $condition = [];
+        if ($online !== null) {
+            $condition = ['online' => $online === '1'];
+        }
+
+        return $this->postRepository->count($condition);
     }
 }
