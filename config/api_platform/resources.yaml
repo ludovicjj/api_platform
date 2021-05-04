@@ -29,6 +29,14 @@ resources:
             post:
                 method: POST
                 validation_groups: [App\Entity\Post, 'validationGroups']
+            count:
+                method: 'GET'
+                path: '/posts/count'
+                controller: App\Controller\PostCountController
+                pagination_enabled: false
+                openapi_context:
+                    summary: Calcul le nombre d'article
+                    description: Calcul le nombre d'article
 
         itemOperations:
             put:
