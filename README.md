@@ -6,8 +6,8 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] La sérialisation
 - [x] La validation des contraintes
 - [x] Pagination et filtres
-- [ ] Etude du traitement d'une requête par API platform
-- [ ] Opération personnalisée
+- [x] Etude du traitement d'une requête par API platform
+- [x] Opération personnalisée
 - [ ] Documentation (OpenAPI)
 - [ ] DataProvider
 - [ ] DataPersister
