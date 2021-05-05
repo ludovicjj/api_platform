@@ -8,7 +8,7 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Pagination et filtres
 - [x] Etude du traitement d'une requête par API platform
 - [x] Opération personnalisée
-- [ ] Documentation (OpenAPI)
+- [x] Documentation (OpenApiFactory)
 - [ ] DataProvider
 - [ ] DataPersister
 - [ ] Authentification JSON
