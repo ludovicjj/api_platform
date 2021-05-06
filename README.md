@@ -9,7 +9,7 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Etude du traitement d'une requête par API platform
 - [x] Opération personnalisée
 - [x] Documentation (OpenApiFactory)
-- [ ] DataProvider
+- [x] DataProvider
 - [ ] DataPersister
 - [ ] Authentification JSON
 - [ ] Authentification Form HTML
