@@ -1,4 +1,14 @@
 resources:
+    App\Entity\Dependency:
+        attributes:
+            pagination_enabled: false
+        collectionOperations:
+            get:
+                method: GET
+        itemOperations:
+            get:
+                method: GET
+
     App\Entity\Category:
         collectionOperations:
             get:
