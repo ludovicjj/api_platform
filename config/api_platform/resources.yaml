@@ -5,9 +5,31 @@ resources:
         collectionOperations:
             get:
                 method: GET
+            post:
+                method: POST
         itemOperations:
             get:
                 method: GET
+            put:
+                method: PUT
+                denormalization_context:
+                    groups: ['write:dependency']
+                openapi_context:
+                    summary: Update version Dependency
+                    description: Update version Dependency by uuid
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        version:
+                                            type: string
+                                            description: The dependency uuid.
+                                    example:
+                                        version: '3.5.*'
+            delete:
+                method: DELETE
 
     App\Entity\Category:
         collectionOperations:
