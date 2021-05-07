@@ -10,7 +10,7 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Opération personnalisée
 - [x] Documentation (OpenApiFactory)
 - [x] DataProvider
-- [ ] DataPersister
+- [x] DataPersister
 - [ ] Authentification JSON
 - [ ] Authentification Form HTML
 - [ ] Authentification JWT (LexikJWTAuthenticationBundle)
