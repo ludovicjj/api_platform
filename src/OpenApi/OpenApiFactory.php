@@ -24,6 +24,25 @@ class OpenApiFactory implements OpenApiFactoryInterface
         $pathItem = $openApi->getPaths()->getPath('/api/categories/{id}');
         $openApi->getPaths()->addPath('/api/categories/{id}', $pathItem->withGet(null));
 
+        // Remove path when summary is hidden
+        /**
+         * @var string $uri
+         * @var PathItem $path
+         */
+        foreach($openApi->getPaths()->getPaths() as $uri => $path) {
+            if ($path->getGet() && $path->getGet()->getSummary() === 'hidden') {
+                $openApi->getPaths()->addPath($uri, $path->withGet(null));
+            }
+        }
+
+        // auth cookie
+        $schemes = $openApi->getComponents()->getSecuritySchemes();
+        $schemes['cookieAuth'] = new \ArrayObject([
+            'type' => 'apiKey',
+            'in' => 'cookie',
+            'name' => 'PHPSESSID'
+        ]);
+
         // Create new entry GET : /api/ping
         $response = new Response(
             'Renvoi un ping',
