@@ -27,6 +27,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     public const LOGIN_ROUTE = 'app_login';
+    public const CONTENT_TYPES = [
+        'application/json',
+        'application/ld+json',
+        '*/*'
+    ];
 
     private $entityManager;
     private $urlGenerator;
@@ -114,9 +119,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        if (in_array('application/json', $request->getAcceptableContentTypes())) {
-            return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
+        foreach ($request->getAcceptableContentTypes() as $contentType) {
+            if (in_array($contentType, self::CONTENT_TYPES)) {
+                return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
+            }
         }
+
         $url = $this->getLoginUrl();
 
         return new RedirectResponse($url);
