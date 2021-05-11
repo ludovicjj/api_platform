@@ -21,8 +21,6 @@ class OpenApiFactory implements OpenApiFactoryInterface
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = $this->decorated->__invoke($context);
-        $pathItem = $openApi->getPaths()->getPath('/api/categories/{id}');
-        $openApi->getPaths()->addPath('/api/categories/{id}', $pathItem->withGet(null));
 
         // Remove path when summary is hidden
         /**
@@ -42,6 +40,13 @@ class OpenApiFactory implements OpenApiFactoryInterface
             'in' => 'cookie',
             'name' => 'PHPSESSID'
         ]);
+
+        //Update entry GET: /api/me
+        $meOperation = $openApi->getPaths()->getPath('/api/me')->getGet()->withParameters([]);
+        $meOperation->addResponse(new Response("Unauthorized"), 401);
+        $mePath = $openApi->getPaths()->getPath('/api/me')->withGet($meOperation);
+        $openApi->getPaths()->addPath('/api/me', $mePath);
+
 
         // Create new entry GET : /api/ping
         $response = new Response(
