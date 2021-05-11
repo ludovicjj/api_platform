@@ -3,7 +3,9 @@ resources:
         attributes:
             normalization_context:
                 groups: ['read:user']
-        collectionOperations:
+        collectionOperations: []
+
+        itemOperations:
             me:
                 method: GET
                 pagination_enabled: false
@@ -13,12 +15,4 @@ resources:
                 security: 'is_granted("ROLE_USER")'
                 openapi_context:
                     security:
-                        - cookieAuth: []
-        itemOperations:
-            get:
-                method: GET
-                controller: ApiPlatform\Core\Action\NotFoundAction
-                read: false
-                output: false
-                openapi_context:
-                    summary: hidden
+                        -   cookieAuth: [ ]
