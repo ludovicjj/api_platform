@@ -25,14 +25,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("api/logout", name="api_logout", methods={"POST"})
-     */
-    public function logout() {
-
-    }
-
-    /**
-     * @Route("login", name="app_login")
+     * @Route("/login", name="app_login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -48,5 +41,12 @@ class SecurityController extends AbstractController
                 'error' => $error
             ]
         );
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout() {
+
     }
 }
