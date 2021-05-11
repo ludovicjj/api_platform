@@ -11,8 +11,8 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Documentation (OpenApiFactory)
 - [x] DataProvider
 - [x] DataPersister
-- [ ] Authentification JSON
-- [ ] Authentification Form HTML
+- [x] Authentification JSON (cookie)
+- [x] Authentification Form HTML
 - [ ] Authentification JWT (LexikJWTAuthenticationBundle)
 - [ ] JWTRefreshTokenBundle
 - [ ] Authentication API key
