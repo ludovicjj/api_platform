@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Subscriber;
-
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,6 +9,11 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
 
 class LogoutSubscriber implements EventSubscriberInterface
 {
+    public const AVAILABLE_CONTENT_TYPES = [
+        'application/json',
+        '*/*'
+    ];
+
     public static function getSubscribedEvents()
     {
         return [
@@ -20,8 +23,11 @@ class LogoutSubscriber implements EventSubscriberInterface
 
     public function onLogoutEvent(LogoutEvent $event)
     {
-        if (in_array('application/json', $event->getRequest()->getAcceptableContentTypes())) {
-            $event->setResponse(new JsonResponse(null, Response::HTTP_NO_CONTENT));
+        foreach ($event->getRequest()->getAcceptableContentTypes() as $contentType) {
+            if (in_array($contentType, self::AVAILABLE_CONTENT_TYPES)) {
+                $event->setResponse(new JsonResponse(null, Response::HTTP_NO_CONTENT));
+                break;
+            }
         }
     }
 }
