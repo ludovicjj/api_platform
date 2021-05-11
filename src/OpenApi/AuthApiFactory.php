@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\OpenApi;
-
 
 use ApiPlatform\Core\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\Core\OpenApi\Model\Operation;
@@ -11,7 +9,7 @@ use ApiPlatform\Core\OpenApi\Model\RequestBody;
 use ApiPlatform\Core\OpenApi\Model\Response;
 use ApiPlatform\Core\OpenApi\OpenApi;
 
-class LoginApiFactory implements OpenApiFactoryInterface
+class AuthApiFactory implements OpenApiFactoryInterface
 {
     private $decorated;
 
