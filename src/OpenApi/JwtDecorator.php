@@ -8,9 +8,9 @@ use ApiPlatform\Core\OpenApi\Model\PathItem;
 use ApiPlatform\Core\OpenApi\Model\RequestBody;
 use ApiPlatform\Core\OpenApi\Model\Response;
 use ApiPlatform\Core\OpenApi\OpenApi;
-use ApiPlatform\Core\OpenApi\Model;
+use ArrayObject;
 
-class AuthApiFactory implements OpenApiFactoryInterface
+class JwtDecorator implements OpenApiFactoryInterface
 {
     private $decorated;
 
@@ -23,7 +23,7 @@ class AuthApiFactory implements OpenApiFactoryInterface
     {
         $openApi = $this->decorated->__invoke($context);
         $schemas = $openApi->getComponents()->getSchemas();
-        $schemas['Token'] = new \ArrayObject([
+        $schemas['Token'] = new ArrayObject([
            'type' => 'object',
            'properties' => [
                'token' => [
@@ -33,7 +33,7 @@ class AuthApiFactory implements OpenApiFactoryInterface
            ]
         ]);
 
-        $schemas['Credentials'] = new \ArrayObject([
+        $schemas['Credentials'] = new ArrayObject([
             'type' => 'object',
             'properties' => [
                 'username' => [
@@ -47,7 +47,7 @@ class AuthApiFactory implements OpenApiFactoryInterface
             ]
         ]);
 
-        $schemas['Error'] = new \ArrayObject([
+        $schemas['Error'] = new ArrayObject([
             'type' => 'object',
             'properties' => [
                 'code' => [
@@ -60,15 +60,14 @@ class AuthApiFactory implements OpenApiFactoryInterface
         ]);
 
         // Create new path POST : /api/login
-        $loginOperation = new Operation();
-        $loginOperation = $loginOperation
+        $loginOperation = (new Operation())
             ->withOperationId('postLoginApi')
             ->withTags(['Authentication'])
             ->withSummary("Get JWT token to login.")
             ->withRequestBody(
                 new RequestBody(
                     'Generate new JWT Token',
-                    new \ArrayObject([
+                    new ArrayObject([
                         'application/json' => [
                             'schema' => [
                                 '$ref' => '#/components/schemas/Credentials'
@@ -80,7 +79,7 @@ class AuthApiFactory implements OpenApiFactoryInterface
             ->addResponse(
                 new Response(
                     'Get JWT token',
-                    new \ArrayObject([
+                    new ArrayObject([
                         'application/json' => [
                             'schema' => [
                                 '$ref' => '#/components/schemas/Token'
@@ -93,7 +92,7 @@ class AuthApiFactory implements OpenApiFactoryInterface
             ->addResponse(
                 new Response(
                     'Authentication fail',
-                    new \ArrayObject([
+                    new ArrayObject([
                         'application/json' => [
                             'schema' => [
                                 '$ref' => '#/components/schemas/Error'
@@ -107,18 +106,16 @@ class AuthApiFactory implements OpenApiFactoryInterface
 
 
         // Create new path POST : /api/logout
-        $logoutOperation = new Operation();
-        $logoutOperation = $logoutOperation
-            ->withOperationId('postLogoutApi')
-            ->withTags(['Authentication'])
-            ->withSummary('Logout')
-            ->withDescription('Logout current User')
-            ->addResponse(new Response('Logout success'), 204);
-        $logoutPath = new PathItem();
-        $logoutPath = $logoutPath->withPost($logoutOperation);
+        // $logoutOperation = (new Operation())
+        //     ->withOperationId('postLogoutApi')
+        //     ->withTags(['Authentication'])
+        //     ->withSummary('Logout')
+        //     ->withDescription('Logout current User')
+        //     ->addResponse(new Response('Logout success'), 204);
+        // $logoutPath = (new PathItem())->withPost($logoutOperation);
+        // $openApi->getPaths()->addPath('/logout', $logoutPath);
 
 
-        $openApi->getPaths()->addPath('/logout', $logoutPath);
         $openApi->getPaths()->addPath('/api/login', $loginPath);
 
         return $openApi;
