@@ -130,7 +130,11 @@ class User implements UserInterface, JWTUserInterface
     public static function createFromPayload($username, array $payload)
     {
         $user = new User();
-        $user->setId($username);
+
+        $user
+            ->setId($username)
+            ->setEmail($payload['email'] ?? '');
+
         return $user;
     }
 }
