@@ -8,6 +8,7 @@ use ApiPlatform\Core\OpenApi\Model\PathItem;
 use ApiPlatform\Core\OpenApi\Model\RequestBody;
 use ApiPlatform\Core\OpenApi\Model\Response;
 use ApiPlatform\Core\OpenApi\OpenApi;
+use ApiPlatform\Core\OpenApi\Model;
 
 class AuthApiFactory implements OpenApiFactoryInterface
 {
@@ -21,31 +22,56 @@ class AuthApiFactory implements OpenApiFactoryInterface
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = $this->decorated->__invoke($context);
+        $schemas = $openApi->getComponents()->getSchemas();
+        $schemas['Token'] = new \ArrayObject([
+           'type' => 'object',
+           'properties' => [
+               'token' => [
+                   'type' => 'string',
+                   'readonly' => true
+               ]
+           ]
+        ]);
+
+        $schemas['Credentials'] = new \ArrayObject([
+            'type' => 'object',
+            'properties' => [
+                'username' => [
+                    'type' => 'string',
+                    'example' => 'john@doe.fr'
+                ],
+                'password' => [
+                    'type' => 'string',
+                    'example' => 'secret'
+                ]
+            ]
+        ]);
+
+        $schemas['Error'] = new \ArrayObject([
+            'type' => 'object',
+            'properties' => [
+                'code' => [
+                    'type' => 'integer'
+                ],
+                'message' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]);
 
         // Create new path POST : /api/login
         $loginOperation = new Operation();
         $loginOperation = $loginOperation
             ->withOperationId('postLoginApi')
             ->withTags(['Authentication'])
-            ->withSummary("Login")
-            ->withDescription("Provide credentials to login")
+            ->withSummary("Get JWT token to login.")
             ->withRequestBody(
                 new RequestBody(
-                    'Your credentials',
+                    'Generate new JWT Token',
                     new \ArrayObject([
                         'application/json' => [
                             'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'username' => [
-                                        'type' => 'string',
-                                        'example' => 'john@doe.fr'
-                                    ],
-                                    'password' => [
-                                        'type' => 'string',
-                                        'example' => 'secret'
-                                    ]
-                                ]
+                                '$ref' => '#/components/schemas/Credentials'
                             ]
                         ]
                     ])
@@ -53,23 +79,11 @@ class AuthApiFactory implements OpenApiFactoryInterface
             )
             ->addResponse(
                 new Response(
-                    'Authentication successful',
+                    'Get JWT token',
                     new \ArrayObject([
                         'application/json' => [
                             'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'email' => [
-                                        'type' => 'string',
-                                        'example' => 'john@doe.fr'
-                                    ],
-                                    'roles' => [
-                                        'type' => 'array',
-                                        'items' => [
-                                            'type' => 'string'
-                                        ]
-                                    ]
-                                ]
+                                '$ref' => '#/components/schemas/Token'
                             ]
                         ]
                     ])
@@ -82,20 +96,14 @@ class AuthApiFactory implements OpenApiFactoryInterface
                     new \ArrayObject([
                         'application/json' => [
                             'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'error' => [
-                                        'type' => 'string'
-                                    ]
-                                ]
+                                '$ref' => '#/components/schemas/Error'
                             ]
                         ]
                     ])
                 ),
                 401
             );
-        $loginPath = new PathItem();
-        $loginPath = $loginPath->withPost($loginOperation);
+        $loginPath = (new PathItem())->withPost($loginOperation);
 
 
         // Create new path POST : /api/logout
