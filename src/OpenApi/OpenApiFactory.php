@@ -33,17 +33,21 @@ class OpenApiFactory implements OpenApiFactoryInterface
             }
         }
 
-        // auth cookie
         $schemes = $openApi->getComponents()->getSecuritySchemes();
-        $schemes['cookieAuth'] = new \ArrayObject([
-            'type' => 'apiKey',
-            'in' => 'cookie',
-            'name' => 'PHPSESSID'
+        //auth cookie :
+        // $schemes['cookieAuth'] = new \ArrayObject([
+        //     'type' => 'apiKey',
+        //     'in' => 'cookie',
+        //     'name' => 'PHPSESSID'
+        // ]);
+        $schemes['bearerAuth'] = new \ArrayObject([
+            'type' => 'http',
+            'scheme' => 'bearer',
+            'bearerFormat' => 'JWT'
         ]);
 
         //Update entry GET: /api/me
         $meOperation = $openApi->getPaths()->getPath('/api/me')->getGet()->withParameters([]);
-        $meOperation->addResponse(new Response("Unauthorized"), 401);
         $mePath = $openApi->getPaths()->getPath('/api/me')->withGet($meOperation);
         $openApi->getPaths()->addPath('/api/me', $mePath);
 
