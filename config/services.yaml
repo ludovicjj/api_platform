@@ -35,14 +35,13 @@ services:
         arguments:
             - '%kernel.project_dir%'
 
-    #OpenApiFactory
+    #OpenApiFactory Decorator
     App\OpenApi\OpenApiFactory:
         decorates: 'api_platform.openapi.factory'
         arguments: [ '@App\OpenApi\OpenApiFactory.inner' ]
         autoconfigure: false
-    App\OpenApi\AuthApiFactory:
+    App\OpenApi\JwtDecorator:
         decorates: 'api_platform.openapi.factory'
-        arguments: [ '@App\OpenApi\AuthApiFactory.inner' ]
         autoconfigure: false
 
     # filters
