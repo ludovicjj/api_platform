@@ -11,7 +11,8 @@ security:
                 class: App\Entity\User
                 property: email
         jwt_provider:
-            lexik_jwt: ~
+            lexik_jwt:
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -20,7 +21,7 @@ security:
             pattern: ^/api/login$
             stateless: true
             anonymous: true
-            prodiver: app_user_provider
+            provider: app_user_provider
             json_login:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
