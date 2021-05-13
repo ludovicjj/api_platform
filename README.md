@@ -13,8 +13,8 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] DataPersister
 - [x] Authentification JSON (cookie)
 - [x] Authentification Form HTML
-- [ ] Authentification JWT (LexikJWTAuthenticationBundle)
-- [ ] JWTRefreshTokenBundle
+- [x] Authentification JWT (LexikJWTAuthenticationBundle)
+- [x] JWTRefreshTokenBundle
 - [ ] Authentication API key
 - [ ] DoctrineExtension
 - [ ] Denormalizer custom
