@@ -13,6 +13,10 @@ security:
         jwt_provider:
             lexik_jwt:
                 class: App\Entity\User
+        refresh_user_provider:
+            entity:
+                class: App\Entity\User
+                property: id
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
