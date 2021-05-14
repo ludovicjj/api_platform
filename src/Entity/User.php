@@ -41,6 +41,7 @@ class User implements UserInterface, JWTUserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=ApiKey::class, cascade={"persist", "remove"})
+     * @Groups({"read:user"})
      */
     private $apiKey;
 

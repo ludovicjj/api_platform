@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\ApiKeyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ApiKeyRepository::class)
@@ -20,6 +21,7 @@ class ApiKey
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:user"})
      */
     private $apiKey;
 
