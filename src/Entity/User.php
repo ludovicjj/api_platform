@@ -17,19 +17,19 @@ class User implements UserInterface, JWTUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:user"})
+     * @Groups({"read:user", "read:user:me"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"read:user"})
+     * @Groups({"read:user", "read:user:me"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"read:user"})
+     * @Groups({"read:user", "read:user:me"})
      */
     private $roles = [];
 
