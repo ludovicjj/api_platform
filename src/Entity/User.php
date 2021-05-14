@@ -39,6 +39,11 @@ class User implements UserInterface, JWTUserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ApiKey::class, cascade={"persist", "remove"})
+     */
+    private $apiKey;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,5 +141,17 @@ class User implements UserInterface, JWTUserInterface
             ->setEmail($payload['email'] ?? '');
 
         return $user;
+    }
+
+    public function getApiKey(): ?ApiKey
+    {
+        return $this->apiKey;
+    }
+
+    public function setApiKey(?ApiKey $apiKey): self
+    {
+        $this->apiKey = $apiKey;
+
+        return $this;
     }
 }
