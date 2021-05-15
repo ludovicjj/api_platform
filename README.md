@@ -15,7 +15,7 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Authentification Form HTML
 - [x] Authentification JWT (LexikJWTAuthenticationBundle)
 - [x] JWTRefreshTokenBundle
-- [ ] Authentication API key
+- [x] Authentication API key
 - [ ] DoctrineExtension
 - [ ] Denormalizer custom
 - [ ] Serialization dynamique & Role de l'utilisateur
