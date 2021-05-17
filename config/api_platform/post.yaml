@@ -62,6 +62,7 @@ resources:
                 controller: App\Controller\PostPublishController
                 openapi_context:
                     summary: Permet de mettre en ligne un article
+                    description: Permet de mettre en ligne un article
                     requestBody:
                         content:
                             application/json:
