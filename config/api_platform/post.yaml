@@ -23,6 +23,12 @@ resources:
             post:
                 method: POST
                 validation_groups: [ App\Entity\Post, 'validationGroups' ]
+                openapi_context:
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    $ref: '#/components/schemas/Post-input'
             count:
                 method: 'GET'
                 path: '/posts/count'

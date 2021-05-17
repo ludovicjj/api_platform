@@ -32,6 +32,46 @@ class JwtDecorator implements OpenApiFactoryInterface
                ]
            ]
         ]);
+        $schemas['Post-input'] = new ArrayObject([
+            'type' => 'object',
+            'properties' => [
+                'title' => [
+                    'type' => 'string',
+                    'minLength' => 5,
+                    'description' => "Nom de l'article",
+                    'example' => 'My post title'
+                ],
+                'slug' => [
+                    'type' => 'string',
+                    'description' => "Slug de l'article",
+                    'example' => 'my-post-title'
+                ],
+                'content' => [
+                    'type' => 'string',
+                    'description' => "Le contenu de l'article",
+                    'example' => "my content"
+                ],
+                'category' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'name' => [
+                            'type' => 'string',
+                            'minLength' => 3,
+                            'description' => 'Nom de la catégorie',
+                            'example' => 'my awesome categorie'
+                        ]
+                    ],
+                    'required' => [
+                        'name'
+                    ]
+                ]
+            ],
+            'required' => [
+                'title',
+                'slug',
+                'content'
+            ]
+        ]);
 
         $schemas['Credentials'] = new ArrayObject([
             'type' => 'object',
