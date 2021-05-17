@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  */
-class Post
+class Post implements UserOwnedInterface
 {
     public function __construct() {
         $this->createdAt = new \DateTime();
