@@ -50,6 +50,9 @@ class Post implements UserOwnedInterface
     /**
      * @ORM\Column(type="text")
      * @Groups({"read:post", "write:post"})
+     * @Assert\NotBlank(
+     *     groups="create:post"
+     * )
      */
     private $content;
 
