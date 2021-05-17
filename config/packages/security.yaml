@@ -34,6 +34,7 @@ security:
                     - App\Security\LoginAuthenticator
         main:
             anonymous: true
+            stateless: true
             provider: apikey_user_provider
             guard:
                 authenticators:
