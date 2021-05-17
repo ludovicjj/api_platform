@@ -80,7 +80,7 @@ class Post implements UserOwnedInterface
      * @ORM\Column(type="boolean", options={"default":"0"})
      * @Groups({"read:posts"})
      */
-    private $online;
+    private $online = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
