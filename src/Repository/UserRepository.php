@@ -68,7 +68,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function loadUserByUsername(string $username)
     {
         return $this->createQueryBuilder('user')
-            ->join('user.apiKey', 'api_key', 'WITH', 'api_key.id = user.apiKey')
+            ->join('user.apiKey', 'api_key')
             ->andWhere('api_key.apiKey = :key')
             ->setParameter('key', $username)
             ->getQuery()
