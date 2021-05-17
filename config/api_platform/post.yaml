@@ -6,7 +6,7 @@ resources:
                 openapi_definition_name: 'Collection'
             denormalization_context:
                 groups: [ 'write:post' ]
-            pagination_items_per_page: 2
+            pagination_items_per_page: 10
             pagination_maximum_items_per_page: 10
             pagination_client_items_per_page: true
 
@@ -17,6 +17,9 @@ resources:
                 normalization_context:
                     groups: [ 'read:posts', 'read:post' ]
                     openapi_definition_name: 'Detail'
+                openapi_context:
+                    security:
+                        - bearerAuth: []
             post:
                 method: POST
                 validation_groups: [ App\Entity\Post, 'validationGroups' ]
