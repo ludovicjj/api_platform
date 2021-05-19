@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 
-class PostUserOwnedDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+class UserOwnedDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
@@ -24,9 +24,13 @@ class PostUserOwnedDenormalizer implements ContextAwareDenormalizerInterface, De
 
     public function supportsDenormalization($data, string $type, string $format = null, array $context = [])
     {
-        $isAlreadyCalled = $context[self::ALREADY_CALLED_DENORMALIZER] ?? false;
+        dump($data, $type, $context);
+        $isAlreadyCalled = $data[self::ALREADY_CALLED_DENORMALIZER] ?? false;
 
-        return ($type === Post::class && $isAlreadyCalled === false);
+        // Check if type is subclass of App\Entity\UserOwnedInterface
+        $isSubClass = is_subclass_of($type, UserOwnedInterface::class, true);
+
+        return ($isSubClass && $isAlreadyCalled === false);
     }
 
     public function denormalize($data, string $type, string $format = null, array $context = [])
@@ -38,13 +42,18 @@ class PostUserOwnedDenormalizer implements ContextAwareDenormalizerInterface, De
         // Denormalizer when denormalize -> call each denormalizer to check who support.
         // ... infinite loop
 
-        // Solution :
-        // Define new key into context with value: true
+        // Solution with data[]:
+        // Define new key into data[key] = true
         // Denormalizer when denormalize -> call each denormalizer to check who support.
-        // UserOwnedDenormalizer support Post::class but const is not false
+        // UserOwnedDenormalizer support Post::class BUT $data[key] !== false
         // end loop
 
-        $context[self::ALREADY_CALLED_DENORMALIZER] = true;
+        // Solution with context[]:
+        // Define new key into context[key] = true, this key MUST UNIQUE
+        // In each loop context is shared.
+
+        $data[self::ALREADY_CALLED_DENORMALIZER] = true;
+        // $context[$this->createCustomKey($type)] = true;
 
         /** @var UserOwnedInterface $object */
         $object = $this->denormalizer->denormalize($data, $type, $format, $context);
