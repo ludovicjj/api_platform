@@ -2,7 +2,6 @@
 
 namespace App\Serializer;
 
-use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\UserOwnedInterface;
 use Symfony\Component\Security\Core\Security;
