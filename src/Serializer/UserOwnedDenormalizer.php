@@ -23,7 +23,6 @@ class UserOwnedDenormalizer implements ContextAwareDenormalizerInterface, Denorm
 
     public function supportsDenormalization($data, string $type, string $format = null, array $context = [])
     {
-        dump($data, $type, $context);
         $isAlreadyCalled = $data[self::ALREADY_CALLED_DENORMALIZER] ?? false;
 
         // Check if type is subclass of App\Entity\UserOwnedInterface
