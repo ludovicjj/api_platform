@@ -18,5 +18,5 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Authentication API key
 - [x] DoctrineExtension
 - [x] Denormalizer custom
-- [ ] Serialization dynamique & Role de l'utilisateur
+- [x] Custom context builder & Custom Normalizer
 - [ ] Envoie de fichier
