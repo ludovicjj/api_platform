@@ -15,7 +15,7 @@ resources:
                 method: GET
                 filters: [ 'post.order_filter' ]
                 normalization_context:
-                    groups: [ 'read:posts', 'read:post' ]
+                    groups: [ 'read:posts' ]
                     openapi_definition_name: 'Detail'
                 openapi_context:
                     security:
