@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  */
-class Post implements UserOwnedInterface
+class Post // implements UserOwnedInterface
 {
     public function __construct() {
         $this->createdAt = new \DateTime();
@@ -43,7 +43,7 @@ class Post implements UserOwnedInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:posts", "write:post"})
+     * @Groups({"read:posts:User", "write:post"})
      */
     private $slug;
 
@@ -78,7 +78,7 @@ class Post implements UserOwnedInterface
 
     /**
      * @ORM\Column(type="boolean", options={"default":"0"})
-     * @Groups({"read:posts"})
+     * @Groups({"read:posts:User"})
      */
     private $online = false;
 
