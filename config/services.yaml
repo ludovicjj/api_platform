@@ -35,7 +35,7 @@ services:
         arguments:
             - '%kernel.project_dir%'
 
-    #OpenApiFactory Decorator
+    # Decorator
     App\OpenApi\OpenApiFactory:
         decorates: 'api_platform.openapi.factory'
         arguments: [ '@App\OpenApi\OpenApiFactory.inner' ]
@@ -43,6 +43,9 @@ services:
     App\OpenApi\JwtDecorator:
         decorates: 'api_platform.openapi.factory'
         autoconfigure: false
+    # App\Serializer\PostContextBuilder:
+    #     decorates: 'api_platform.serializer.context_builder'
+    #     autoconfigure: false
 
     # filters
     app.post.search_filter:
