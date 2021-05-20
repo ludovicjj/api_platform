@@ -62,6 +62,8 @@ resources:
                 method: DELETE
             get:
                 method: GET
+                normalization_context:
+                    groups: [ 'read:post' ]
             publish:
                 method: 'POST'
                 path: '/posts/{id}/publish'
