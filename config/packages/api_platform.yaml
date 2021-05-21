@@ -3,6 +3,11 @@ api_platform:
     show_webby: false
     mapping:
         paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/config/api_platform']
+    formats:
+        jsonld:    ['application/ld+json']
+        json:      ['application/json']
+        html:      ['text/html']
+        multipart: ['multipart/form-data']
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
