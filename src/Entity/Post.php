@@ -87,6 +87,11 @@ class Post // implements UserOwnedInterface
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filePath;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -184,6 +189,18 @@ class Post // implements UserOwnedInterface
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    public function setFilePath(?string $filePath): self
+    {
+        $this->filePath = $filePath;
 
         return $this;
     }
