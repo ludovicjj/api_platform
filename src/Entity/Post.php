@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @Vich\Uploadable
  */
 class Post // implements UserOwnedInterface
 {
@@ -91,6 +94,14 @@ class Post // implements UserOwnedInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $filePath;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @var File|null
+     * @Vich\UploadableField(mapping="post_image", fileNameProperty="filePath")
+     */
+    private $file;
 
     public function getId(): ?int
     {
@@ -203,5 +214,17 @@ class Post // implements UserOwnedInterface
         $this->filePath = $filePath;
 
         return $this;
+    }
+
+    public function setFile(?File $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
     }
 }
