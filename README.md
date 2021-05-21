@@ -19,4 +19,4 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] DoctrineExtension
 - [x] Denormalizer custom
 - [x] Custom context builder & Custom Normalizer
-- [ ] Envoie de fichier
+- [x] Envoie de fichier (VichUploaderBundle)
