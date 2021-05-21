@@ -81,3 +81,15 @@ resources:
                 path: '/posts/{id}/image'
                 controller: App\Controller\PostImageController
                 deserialize: false
+                openapi_context:
+                    summary: Add image to post
+                    description: Add image to post
+                    requestBody:
+                        content:
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        file:
+                                            type: string
+                                            format: binary
