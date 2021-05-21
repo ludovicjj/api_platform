@@ -76,3 +76,8 @@ resources:
                             application/json:
                                 schema:
                                     type: object
+            image:
+                method: POST
+                path: '/posts/{id}/image'
+                controller: App\Controller\PostImageController
+                deserialize: false
