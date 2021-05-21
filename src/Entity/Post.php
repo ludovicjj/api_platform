@@ -96,6 +96,12 @@ class Post // implements UserOwnedInterface
     private $filePath;
 
     /**
+     * @var string|null;
+     * @Groups({"read:posts"})
+     */
+    private $fileUrl;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @var File|null
@@ -226,5 +232,17 @@ class Post // implements UserOwnedInterface
     public function getFile(): ?File
     {
         return $this->file;
+    }
+
+    public function setFileUrl(?string $fileUrl): self
+    {
+        $this->fileUrl = $fileUrl;
+
+        return $this;
+    }
+
+    public function getFileUrl(): ?string
+    {
+        return $this->fileUrl;
     }
 }
