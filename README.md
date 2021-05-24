@@ -20,3 +20,4 @@ Veille techno sur API platform pour découvrir les sujets suivant :
 - [x] Denormalizer custom
 - [x] Custom context builder & Custom Normalizer
 - [x] Envoie de fichier (VichUploaderBundle)
+- [x] Deserialize multipart (DeserializeListener)
