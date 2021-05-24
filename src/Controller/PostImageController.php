@@ -18,7 +18,12 @@ class PostImageController
             throw new RuntimeException('expected object instance of App\Entity\Post');
         }
 
-        $post->setFile($request->files->get('file'));
+        // Custom DeserializeListener handle denormalize is content-type is multipart.
+        // And include $_POST and $_FILES when denormalize.
+        // Property file is linked to groups: write:post
+
+        // $post->setFile($request->files->get('file'));
+
         // It is required that at least one field changes if you are using doctrine
         // otherwise the event listeners won't be called and the file is lost
         $post->setUpdatedAt(new \DateTime());
