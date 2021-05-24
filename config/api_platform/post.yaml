@@ -80,7 +80,6 @@ resources:
                 method: POST
                 path: '/posts/{id}/image'
                 controller: App\Controller\PostImageController
-                deserialize: false
                 openapi_context:
                     summary: Add image to post
                     description: Add image to post
