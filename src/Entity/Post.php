@@ -106,6 +106,7 @@ class Post // implements UserOwnedInterface
      *
      * @var File|null
      * @Vich\UploadableField(mapping="post_image", fileNameProperty="filePath")
+     * @Groups({"write:post"})
      */
     private $file;
 
